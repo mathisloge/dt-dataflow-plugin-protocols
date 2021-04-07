@@ -1,3 +1,6 @@
 [submodule "nmea/nmea"]
 	path = nmea/nmea
 	url = https://github.com/mathisloge/nmea
+[submodule "mavlink/c_library_v2"]
+	path = mavlink/c_library_v2
+	url = https://github.com/mavlink/c_library_v2
