@@ -3,11 +3,15 @@
     "version-string": "0.1.0",
     "dependencies": [
         "boost-signals2",
+        "boost-spirit",
         "nlohmann-json",
+        "catch2",
         "corrade",
+        "comms-ublox",
+        "spdlog",
         {
             "name": "magnum",
-            "features":[
+            "features": [
                 "gl"
             ]
         },
