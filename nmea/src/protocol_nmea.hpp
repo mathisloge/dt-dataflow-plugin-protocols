@@ -9,7 +9,7 @@ namespace protocol
     public:
         ProtocolNmea();
         std::string_view name() const override;
-        std::pair<ProtoCIter, ProtoCIter> consumeOneMessage(ProtoCIter begin, ProtoCIter end) override;
+        std::pair<ProtoReadIter, ProtoReadIter> consumeOneMessage(ProtoReadIter begin, ProtoReadIter end) override;
         void setState(State state) override;
         bool isActive() const override;
 

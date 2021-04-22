@@ -16,7 +16,7 @@ namespace protocol
     public:
         Protocol() = default;
         virtual std::string_view name() const = 0;
-        virtual std::pair<ProtoCIter, ProtoCIter> consumeOneMessage(ProtoCIter begin, ProtoCIter end) = 0;
+        virtual std::pair<ProtoReadIter, ProtoReadIter> consumeOneMessage(ProtoReadIter begin, ProtoReadIter end) = 0;
         virtual void setState(State state) = 0;
         virtual bool isActive() const = 0;
         virtual ~Protocol() = default;

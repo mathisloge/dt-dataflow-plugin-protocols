@@ -4,14 +4,14 @@
 
 namespace protocol::detail
 {
-    comms::ErrorStatus UbloxInstance::processSingle(ProtoCIter begin, ProtoCIter end,
-                                                    std::pair<ProtoCIter, ProtoCIter> &read_range,
+    comms::ErrorStatus UbloxInstance::processSingle(ProtoReadIter begin, ProtoReadIter end,
+                                                    std::pair<ProtoReadIter, ProtoReadIter> &read_range,
                                                     UbloxHandler &handler)
     {
         using FrameType = typename std::decay<decltype(frame)>::type;
         using MsgPtr = typename FrameType::MsgPtr;
         MsgPtr msg;
-        ProtoCIter read_it = begin;
+        ProtoReadIter read_it = begin;
         const auto status = comms::processSingleWithDispatch(read_it, std::distance(begin, end), frame, msg, handler);
 
         read_range.first = begin;
@@ -21,6 +21,7 @@ namespace protocol::detail
 
     void UbloxHandler::handle(UbloxMessage &msg)
     {
+        
     }
 
 } // namespace protocol::detail

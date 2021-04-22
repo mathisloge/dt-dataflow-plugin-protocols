@@ -10,39 +10,36 @@
 
 namespace protocol::detail
 {
-    class UbloxHandler;
-    // Common interface class for all the messages
-    using UbloxMessage =
-        ublox::Message<
-            comms::option::app::ReadIterator<ProtoCIter>,
-            comms::option::app::WriteIterator<std::back_insert_iterator<ProtoData>>,
-            comms::option::app::IdInfoInterface,
-            comms::option::app::LengthInfoInterface,
-            comms::option::app::NameInterface,
-            comms::option::app::Handler<UbloxHandler>>;
+class UbloxHandler;
+// Common interface class for all the messages
+using UbloxMessage = ublox::Message<comms::option::app::ReadIterator<ProtoReadIter>,
+                                    comms::option::app::WriteIterator<std::back_insert_iterator<ProtoWriteData>>,
+                                    comms::option::app::IdInfoInterface,
+                                    comms::option::app::LengthInfoInterface,
+                                    comms::option::app::NameInterface,
+                                    comms::option::app::Handler<UbloxHandler>>;
 
-    // Protocol options for client
-    using UbloxClientProtocolOptions = ublox::options::ClientDefaultOptions;
+// Protocol options for client
+using UbloxClientProtocolOptions = ublox::options::ClientDefaultOptions;
 
-    // Client specific frame
-    using UbloxFrame =
-        ublox::frame::UbloxFrame<
-            UbloxMessage,
-            ublox::input::ClientInputMessages<UbloxMessage, UbloxClientProtocolOptions>,
-            UbloxClientProtocolOptions>;
+// Client specific frame
+using UbloxFrame = ublox::frame::UbloxFrame<UbloxMessage,
+                                            ublox::input::ClientInputMessages<UbloxMessage, UbloxClientProtocolOptions>,
+                                            UbloxClientProtocolOptions>;
 
-    struct UbloxInstance
-    {
-        UbloxFrame frame;
-        comms::ErrorStatus processSingle(ProtoCIter begin, ProtoCIter end,
-                                         std::pair<ProtoCIter, ProtoCIter> &read_range,
-                                         UbloxHandler &handler);
-    };
+struct UbloxInstance
+{
+    UbloxFrame frame;
+    comms::ErrorStatus processSingle(ProtoReadIter begin,
+                                     ProtoReadIter end,
+                                     std::pair<ProtoReadIter, ProtoReadIter> &read_range,
+                                     UbloxHandler &handler);
+};
 
-    class UbloxHandler
-    {
-    public:
-        virtual void handle(UbloxMessage &msg);
-    };
+class UbloxHandler
+{
+  public:
+    virtual void handle(UbloxMessage &msg);
+};
 
 } // namespace protocol::detail
