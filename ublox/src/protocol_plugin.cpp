@@ -10,9 +10,9 @@ class UbloxProtocolPlugin final : public ProtocolPlugin
         : ProtocolPlugin{manager, plugin}
     {}
 
-    void registerNodeFactories(IGraphManager &graph) override
+    void registerNodeFactories(core::IGraphManager &graph) override
     {}
-    void registerSlotFactories(IGraphManager &graph) override
+    void registerSlotFactories(core::IGraphManager &graph) override
     {}
 };
 } // namespace dt::df::plugin
